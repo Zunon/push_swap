@@ -6,7 +6,7 @@
 /*   By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 08:57:21 by kalmheir          #+#    #+#             */
-/*   Updated: 2022/06/11 21:23:38 by kalmheir         ###   ########.fr       */
+/*   Updated: 2022/06/11 22:04:47 by kalmheir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	ft_rev_int_tab(int *tab, int size)
 		holder[--size] = tab[counter++];
 	while (--counter >= 0)
 		tab[counter] = holder[counter];
+	free(holder);
 }
 
 int	main(int argc, char **argv)
@@ -71,8 +72,13 @@ int	main(int argc, char **argv)
 	{
 		ft_rev_int_tab(a.data, argc - 1);
 		a.top = argc - 2;
+		sort(a, b);
 	}
 	else if (argc >= 2)
+	{
 		write(STDERR_FILENO, "Error\n", 7);
+	}
+	free(a.data);
+	free(b.data);
 	return (0);
 }
