@@ -6,7 +6,7 @@
 /*   By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 08:57:21 by kalmheir          #+#    #+#             */
-/*   Updated: 2022/05/31 09:06:53 by kalmheir         ###   ########.fr       */
+/*   Updated: 2022/06/11 21:23:38 by kalmheir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,13 @@ unsigned char	check_args(int argc, char **argv, int *arr)
 
 void	ft_rev_int_tab(int *tab, int size)
 {
-	int holder[size];
-	int counter;
+	int	*holder;
+	int	counter;
 
 	counter = 0;
+	holder = ft_calloc(size, sizeof(int));
+	if (!holder)
+		return ;
 	while (size > 0)
 		holder[--size] = tab[counter++];
 	while (--counter >= 0)
@@ -53,21 +56,21 @@ void	ft_rev_int_tab(int *tab, int size)
 
 int	main(int argc, char **argv)
 {
-	int	i;
-	t_stack A;
-	t_stack B;
+	int		i;
+	t_stack	a;
+	t_stack	b;
 
 	i = 0;
-	A.data = ft_calloc(argc - 1, sizeof(int));
-	B.data = ft_calloc(argc - 1, sizeof(int));
-	A.top = -1;
-	B.top = -1;
-	if (!A.data || !B.data)
+	a.data = ft_calloc(argc - 1, sizeof(int));
+	b.data = ft_calloc(argc - 1, sizeof(int));
+	a.top = -1;
+	b.top = -1;
+	if (!a.data || !b.data)
 		return (0);
-	if (argc >= 2 && check_args(argc, argv, A.data))
+	if (argc >= 2 && check_args(argc, argv, a.data))
 	{
-		ft_rev_int_tab(A.data, argc - 1);
-		A.top = argc - 2;
+		ft_rev_int_tab(a.data, argc - 1);
+		a.top = argc - 2;
 	}
 	else if (argc >= 2)
 		write(STDERR_FILENO, "Error\n", 7);
