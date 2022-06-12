@@ -6,12 +6,27 @@
 /*   By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 08:57:21 by kalmheir          #+#    #+#             */
-/*   Updated: 2022/06/12 16:15:13 by kalmheir         ###   ########.fr       */
+/*   Updated: 2022/06/12 16:48:01 by kalmheir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*
+ * check_args(int argc, char **, int *) -> bool
+ * --------------------
+ * checks the validity of arguments given to our program, returning a truthy
+ * value if the arguments are valid.
+ *
+ * parameters:
+ *  int: number of arguments our program has been given
+ *  char **: array of strings representing the individual arguments to our
+ *   program.
+ *
+ * returns: a boolean value (a byte) that's 1 on valid inputs, and 0 on errors.
+ *  errors include: duplicate numbers, non-numerical characters, integer
+ *  overflow, and integer underflow.
+ */
 unsigned char	check_args(int argc, char **argv, int *arr)
 {
 	int		nums[3];
@@ -34,6 +49,18 @@ unsigned char	check_args(int argc, char **argv, int *arr)
 	return (1);
 }
 
+/*
+ * ft_strjoinsp(char *s1, char *s2) -> char *
+ * --------------------
+ * joins the two strings given to it, inserting a single space character in
+ * between them.
+ *
+ * parameters:
+ *  char *(s1): first string to be joined
+ *  char *(s2): second string to be joined
+ *
+ * returns: the joined string that encapsulates the two parameters
+ */
 char	*ft_strjoinsp(char const *s1, char const *s2)
 {
 	size_t	len1;
@@ -58,6 +85,15 @@ char	*ft_strjoinsp(char const *s1, char const *s2)
 	return (result);
 }
 
+/*
+ * ft_rev_int_tab(int *, int)
+ * --------------------
+ * reverses an integer array given to it
+ *
+ * parameters:
+ *  int *: array to be reversed
+ *  int: amount of integers stored within the array
+ */
 void	ft_rev_int_tab(int *tab, int size)
 {
 	int	*holder;
@@ -74,6 +110,22 @@ void	ft_rev_int_tab(int *tab, int size)
 	free(holder);
 }
 
+/*
+ * main(int, char **) -> int
+ * --------------------
+ * entry point for my push_swap program, the program must take a set of
+ * arguments which are valid integers, put them into a stack, and sort that
+ * stack, printing out the instructions needed to sort that stack to standard
+ * output.
+ *
+ * parameters:
+ *  int: number of arguments our program takes from the context that's
+ *   executing it.
+ *  char **: array of strings representing our arguments from the context
+ *
+ * returns: exit code (0 on success), in a typical scenario, there are no cases
+ *  in which it returns a nonzero exit code
+ */
 int	main(int argc, char **argv)
 {
 	t_stack	a;

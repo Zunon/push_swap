@@ -6,12 +6,29 @@
 /*   By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 13:15:30 by kalmheir          #+#    #+#             */
-/*   Updated: 2022/06/12 15:51:33 by kalmheir         ###   ########.fr       */
+/*   Updated: 2022/06/12 17:10:10 by kalmheir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*
+ * patelsort(stack)
+ * --------------------
+ * sorts a stack given that it has exactly 3 elements
+ *
+ * parameters:
+ *  stack: stack to be sorted
+ *
+ * note:
+ *  this algorithm was constructed be considering the sample space as a graph,
+ *  where each state of the stack is a node and the edges are the operations
+ *  connecting them. Then we've used dijkstra's algorithm to compute the most
+ *  optimum paths to the solved state.
+ *  as the algorithms' namesake likes to code, this function is mostly if
+ *  statements to check for the specific state of the stack, and use operations
+ *  tailored to that state to reach the solved state. hence mpatel or patelsort.
+ */
 void	patelsort(t_stack *stack)
 {
 	if (stack->top == 2)
@@ -38,6 +55,16 @@ void	patelsort(t_stack *stack)
 	}
 }
 
+/*
+ * sort(stack a, stack b)
+ * --------------------
+ * selects a sorting algorithm and applies it based on the problem size derived
+ * from stack a.
+ *
+ * parameters:
+ *  stack a: the array in which all values initially exist unsorted
+ *  stack b: an empty stack to aid in our sorting
+ */
 void	sort(t_stack *a, t_stack *b)
 {
 	if (!is_sorted(a))
@@ -57,13 +84,26 @@ void	sort(t_stack *a, t_stack *b)
 }
 
 /*
-n = a.top + 1;
-while (n > 3)
-	find min
-	rotate it to top and push to b
-sort3(a)
-push b back into a
-*/
+ * selectsort(stack a, stack b)
+ * --------------------
+ * sorts the numbers in stack a, by taking the smallest number in stack a to
+ * stack b, and repeating until there's only 3 numbers remaining in stack a,
+ * after which it applies patelsort to stack a, and pushes all numbers from
+ * stack b to a (which were effectively selection sorted in the process of
+ * pushing them to stack b).
+ *
+ * parameters:
+ *  stack a: the stack in which numbers start from and need to be sorted to
+ *  stack b: the stack that starts empty
+ *
+ * pseudocode:
+ *	n = a.top + 1;
+ *	while (n > 3)
+ *		find min
+ *		rotate it to top and push to b
+ *	patelsort(a)
+ *	push b back into a
+ */
 void	selectsort(t_stack *a, t_stack *b)
 {
 	move_until(b, a, 'b', 3);
@@ -75,6 +115,18 @@ void	selectsort(t_stack *a, t_stack *b)
 	}
 }
 
+/*
+ * stack_sort(stack a, stack b)
+ * --------------------
+ * sorts the numbers into stack a by moving the numbers in value-based chunks,
+ * this ensures that when we're pushing back to b, the values we're looking for
+ * are close to each other, with the help of rb and rrb, this makes putting the
+ * numbers back in a sorted way faster (for bigger problem sizes).
+ *
+ * parameters:
+ *  stack a: the stack in which numbers start from and need to be sorted to
+ *  stack b: the stack that starts empty
+*/
 void	stack_sort(t_stack *a, t_stack *b)
 {
 	int				*list;

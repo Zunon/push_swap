@@ -6,12 +6,22 @@
 /*   By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 13:21:24 by kalmheir          #+#    #+#             */
-/*   Updated: 2022/06/12 15:41:46 by kalmheir         ###   ########.fr       */
+/*   Updated: 2022/06/12 17:41:05 by kalmheir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*
+ * refactor_args(int *, char ***)
+ * --------------------
+ * standardizes the given inputs into a format that is usable by our program
+ *
+ * parameters:
+ *  int *: a pointer to an int representing the amount of arguments our program
+ *   was given.
+ *  char ***: a pointer to the string array in which our arguments are stored
+ */
 void	refactor_args(int *argc, char ***argv)
 {
 	int		i;
@@ -34,6 +44,21 @@ void	refactor_args(int *argc, char ***argv)
 	free(accumulator);
 }
 
+/*
+ * find_extreme(stack, bool) -> unsigned int
+ * --------------------
+ * finds an extreme value within the given stack. either the minimum or the
+ * maximum, depending on the inputs.
+ *
+ * parameters:
+ *  stack: stack to be searched through
+ *  bool: which kind of extreme value we're looking for, a truthy value when
+ *   we're looking for the minimum value, and otherwise when we're looking
+ *   the maximum value.
+ *
+ * returns: a pointer to the number found inside the array (mainly used in this
+ *  program for its truthiness)
+ */
 unsigned int	find_extreme(t_stack *stack, unsigned char min)
 {
 	int				extreme;
@@ -59,6 +84,18 @@ unsigned int	find_extreme(t_stack *stack, unsigned char min)
 	return (extr_ind);
 }
 
+/*
+ * move_to_top(stack, unsigned int, char)
+ * --------------------
+ * moves the number at the given index in the given stack to the top of the
+ * stack, using rotation or reverse rotation depending on which is faster to
+ * reach the top of the stack
+ *
+ * parameters:
+ *  stack: the given stack
+ *  unsigned int: index of the value to be moved to the top of the stack
+ *  char: name of the stack (either 'a' or 'b')
+ */
 void	move_to_top(t_stack *stack, unsigned int index, char name)
 {
 	unsigned char	dir;
@@ -78,6 +115,19 @@ void	move_to_top(t_stack *stack, unsigned int index, char name)
 	}
 }
 
+/*
+ * move_until(stack dest, stack src, char, byte)
+ * --------------------
+ * moves extreme values from one stack to the other until a given amount of
+ * numbers remain in the source stack. extreme values are minimums in a, and
+ * maximums in b.
+ *
+ * parameters:
+ *  stack dest: destination stack to be moved into
+ *  stack src: source stack to be moved from
+ *  char: name of the destination stack (either 'a' or 'b')
+ *  byte: the amount of numbers that should remain in the source stack to stop
+ */
 void	move_until(t_stack *dest, t_stack *src, char name,
 	unsigned char until)
 {
@@ -104,6 +154,21 @@ void	move_until(t_stack *dest, t_stack *src, char name,
 	}
 }
 
+/*
+ * find_half(stack, int *, int chunksize, int i) -> int *
+ * --------------------
+ * finds the closest number to the top, and the closest to the bottom that are
+ * both in the given chunk of the given array, in the stack.
+ *
+ * parameters:
+ *  stack: the given stack to be searched through
+ *  int *: the given sorted array to be checked against
+ *  int chunksize: the size of the chunk in the given array
+ *  int i: the index of the chunk to be checked in
+ *
+ * returns: an integer array containing the index of the number closest to the
+ *  top, and the index of the number closest to the bottom.
+ */
 int	*find_half(t_stack *stack, int *list, int chunksize, int i)
 {
 	int	j;
