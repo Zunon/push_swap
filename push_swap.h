@@ -6,7 +6,7 @@
 /*   By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 09:04:44 by kalmheir          #+#    #+#             */
-/*   Updated: 2022/06/12 14:49:26 by kalmheir         ###   ########.fr       */
+/*   Updated: 2022/06/12 16:15:25 by kalmheir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,7 @@ void			move_until(t_stack *dest, t_stack *src, char name,
 					unsigned char until);
 int				*find_half(t_stack *stack, int *list, int chunksize, int i);
 void			move_closest(t_stack *dest, t_stack *src, int high, int low);
+void			free_my_data(t_stack *a, t_stack *b, char ***argv);
+unsigned char	return_no(char **rep);
 
 #endif

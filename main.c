@@ -6,7 +6,7 @@
 /*   By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 08:57:21 by kalmheir          #+#    #+#             */
-/*   Updated: 2022/06/12 13:52:48 by kalmheir         ###   ########.fr       */
+/*   Updated: 2022/06/12 16:15:13 by kalmheir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,22 @@
 
 unsigned char	check_args(int argc, char **argv, int *arr)
 {
-	int		i;
-	int		j;
-	int		n;
+	int		nums[3];
 	char	*rep;
 
-	i = 0;
-	while (i < (argc))
+	nums[0] = -1;
+	while (++(nums[0]) < (argc))
 	{
-		n = ft_atoi(argv[i]);
-		rep = ft_itoa(n);
-		if (ft_strncmp(rep, argv[i], ft_strlen(argv[i])))
-			return (0);
-		j = 0;
-		while (j < i)
-		{
-			if (arr[j] == n)
-				return (0);
-			j++;
-		}
-		arr[i] = n;
-		i++;
+		nums[2] = ft_atoi(argv[nums[0]]);
+		rep = ft_itoa(nums[2]);
+		if (ft_strncmp(rep, argv[nums[0]], ft_strlen(argv[nums[0]])))
+			return (return_no(&rep));
+		nums[1] = -1;
+		while (++(nums[1]) < nums[0])
+			if (arr[nums[1]] == nums[2])
+				return (return_no(&rep));
+		arr[nums[0]] = nums[2];
+		free(rep);
 	}
 	return (1);
 }
@@ -81,17 +76,15 @@ void	ft_rev_int_tab(int *tab, int size)
 
 int	main(int argc, char **argv)
 {
-	int		i;
 	t_stack	a;
 	t_stack	b;
 
-	i = 0;
-	a.data = ft_calloc(argc - 1, sizeof(int));
-	b.data = ft_calloc(argc - 1, sizeof(int));
 	b.top = -1;
+	refactor_args(&argc, &argv);
+	a.data = ft_calloc(argc, sizeof(int));
+	b.data = ft_calloc(argc, sizeof(int));
 	if (!a.data || !b.data)
 		return (0);
-	refactor_args(&argc, &argv);
 	if (argc >= 1 && check_args(argc, argv, a.data))
 	{
 		ft_rev_int_tab(a.data, argc);
@@ -100,7 +93,6 @@ int	main(int argc, char **argv)
 	}
 	else if (argc >= 1)
 		write(STDERR_FILENO, "Error\n", 7);
-	free(a.data);
-	free(b.data);
+	free_my_data(&a, &b, &argv);
 	return (0);
 }

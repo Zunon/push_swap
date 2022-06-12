@@ -6,7 +6,7 @@
 /*   By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 13:21:24 by kalmheir          #+#    #+#             */
-/*   Updated: 2022/06/12 14:51:12 by kalmheir         ###   ########.fr       */
+/*   Updated: 2022/06/12 15:41:46 by kalmheir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,24 @@ void	move_to_top(t_stack *stack, unsigned int index, char name)
 void	move_until(t_stack *dest, t_stack *src, char name,
 	unsigned char until)
 {
-	int				i;
 	int				extr_ind;
 	unsigned char	min;
+	char			srcname;
 
 	if (name != 'a')
+	{
 		min = 1;
+		srcname = 'a';
+	}
 	else
+	{
 		min = 0;
+		srcname = 'b';
+	}
 	while (src->top >= until)
 	{
-		i = 0;
 		extr_ind = find_extreme(src, min);
-		move_to_top(src, extr_ind, 'b');
+		move_to_top(src, extr_ind, srcname);
 		ft_printf("p%c\n", name);
 		pt(dest, src);
 	}

@@ -6,7 +6,7 @@
 /*   By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 13:15:30 by kalmheir          #+#    #+#             */
-/*   Updated: 2022/06/12 14:52:53 by kalmheir         ###   ########.fr       */
+/*   Updated: 2022/06/12 15:51:33 by kalmheir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ void	stack_sort(t_stack *a, t_stack *b)
 			move_closest(b, a, indices[0], indices[1]);
 		free(indices);
 	}
+	free(list);
 	move_until(a, b, 'a', 0);
 }

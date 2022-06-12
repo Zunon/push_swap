@@ -6,7 +6,7 @@
 #    By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 12:12:15 by kalmheir          #+#    #+#              #
-#    Updated: 2022/06/12 14:37:04 by kalmheir         ###   ########.fr        #
+#    Updated: 2022/06/12 15:45:29 by kalmheir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ all: ${LBFT} compile
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-${LBFT}:
+${LBFT}: ${OBJS}
 	${LIBC} ${LBFT} ${OBJS}
 	${LIBR} ${LBFT}
 
