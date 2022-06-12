@@ -6,7 +6,7 @@
 /*   By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 08:57:21 by kalmheir          #+#    #+#             */
-/*   Updated: 2022/06/12 04:01:56 by kalmheir         ###   ########.fr       */
+/*   Updated: 2022/06/12 13:52:48 by kalmheir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,43 +79,19 @@ void	ft_rev_int_tab(int *tab, int size)
 	free(holder);
 }
 
-int	main(int argc, char **argv) // x8, x10
+int	main(int argc, char **argv)
 {
 	int		i;
 	t_stack	a;
 	t_stack	b;
 
-	i = 0; // Sx4
+	i = 0;
 	a.data = ft_calloc(argc - 1, sizeof(int));
 	b.data = ft_calloc(argc - 1, sizeof(int));
-	a.top = -1;
 	b.top = -1;
 	if (!a.data || !b.data)
 		return (0);
-	// if (argc == 2 && ft_strchr(argv[1], ' '))
-	// {
-	// 	int j = 0;
-	// 	args = ft_split(argv[1], ' ');
-	// 	while (args[j++]);
-	// 	argc = j;
-	// 	argv = ft_calloc(argc, sizeof(char *));
-	// 	for (int i = 1; i < argc; i++)
-	// 		argv[i] = args[i - 1];
-	// }
-	char *temp;
-	char *accumulator = malloc(1);
-	*accumulator = 0;
-	for (int j = 1; j < argc; j++)
-	{
-		temp = accumulator;
-		accumulator = ft_strjoinsp(temp, argv[j]);
-		free(temp);
-	}
-	argv = ft_split(accumulator, ' ');
-	argc = 0;
-	while (argv[argc])
-		argc++;
-	free(accumulator);
+	refactor_args(&argc, &argv);
 	if (argc >= 1 && check_args(argc, argv, a.data))
 	{
 		ft_rev_int_tab(a.data, argc);
@@ -123,9 +99,7 @@ int	main(int argc, char **argv) // x8, x10
 		sort(&a, &b);
 	}
 	else if (argc >= 1)
-	{
 		write(STDERR_FILENO, "Error\n", 7);
-	}
 	free(a.data);
 	free(b.data);
 	return (0);

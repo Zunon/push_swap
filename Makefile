@@ -6,13 +6,14 @@
 #    By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 12:12:15 by kalmheir          #+#    #+#              #
-#    Updated: 2022/06/12 02:14:12 by kalmheir         ###   ########.fr        #
+#    Updated: 2022/06/12 14:37:04 by kalmheir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PGRM	=	push_swap
 MAIN	=	main.c
-UTIL	=	stackops.c pswap_utils.c
+UTIL	=	stackops.c pswap_utils0.c sort_algo.c pswap_utils1.c \
+			pswap_utils2.c
 SRCS	=	ft_bzero.c ft_digit.c ft_isalnum.c ft_isalpha.c \
 			ft_isascii.c ft_isprint.c ft_memchr.c ft_memcmp.c \
 			ft_memcpy.c ft_memmove.c ft_memset.c ft_strchr.c \
