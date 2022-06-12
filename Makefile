@@ -6,11 +6,11 @@
 #    By: kalmheir <kalmheir@student.42abudhabi.a    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/09/30 12:12:15 by kalmheir          #+#    #+#              #
-#    Updated: 2022/06/11 20:52:58 by kalmheir         ###   ########.fr        #
+#    Updated: 2022/06/12 02:14:12 by kalmheir         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PGRM	= push_swap
+PGRM	=	push_swap
 MAIN	=	main.c
 UTIL	=	stackops.c pswap_utils.c
 SRCS	=	ft_bzero.c ft_digit.c ft_isalnum.c ft_isalpha.c \
@@ -27,7 +27,6 @@ SRCS	=	ft_bzero.c ft_digit.c ft_isalnum.c ft_isalpha.c \
 			ft_lstlast.c ft_lstadd_back.c ft_lstdelone.c \
 			ft_lstclear.c ft_lstiter.c ft_lstmap.c
 OBJS	= ${SRCS:.c=.o}
-BNOBJCS = ${BNSRCS:.c=.o}
 LBFT	= libft.a
 LIBC	= ar rc
 LIBR	= ranlib
@@ -35,14 +34,14 @@ CC		= gcc
 RM		= rm -f
 CFLAGS	= -Wall -Wextra -Werror
 
-create: all clean
+create: compile
 
 all: ${LBFT} compile
 
 .c.o:
 	${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-${LBFT}: ${OBJS}
+${LBFT}:
 	${LIBC} ${LBFT} ${OBJS}
 	${LIBR} ${LBFT}
 
@@ -51,10 +50,9 @@ compile: ${LBFT}
 
 clean:
 	${RM} ${OBJS}
-	${RM} ${BNOBJCS}
-	${RM} ${LBFT}
 
 fclean: clean
+	${RM} ${LBFT}
 	${RM} ${PGRM}
 
 re: fclean all
